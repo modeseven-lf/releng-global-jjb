@@ -73,7 +73,10 @@ _cleanup()
 _rmtemp()
 {
     # Removes temporary file on script exit
-    rm -f "$tmpfile" 2>/dev/null || true
+    # explicit exit 0 required: login shell .bash_logout runs clear_console
+    # which fails without a TTY, and bash 5.1 propagates that non-zero exit
+    rm -f "$tmpfile" 2>/dev/null
+    exit 0
 }
 
 trap _rmtemp EXIT

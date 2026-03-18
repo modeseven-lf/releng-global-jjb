@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Fixed openstack cron cleanup scripts failing on bash 5.1 login shells.
+    The EXIT trap now uses explicit ``exit 0`` to override non-zero exit
+    codes from ``.bash_logout`` running ``/usr/bin/clear_console`` without
+    a TTY. Affects ``openstack-cleanup-orphaned-ports.sh`` and
+    ``openstack-cleanup-orphaned-objects.sh``.
